@@ -3,15 +3,15 @@ from abc import ABC, abstractmethod
 
 class Service(ABC):
     @abstractmethod
-    def areas(self, medidas: object, cantidad: int):
+    def area(self, medidas: object, cantidad: int):
         pass
 
     @abstractmethod
-    def concreto(self):
+    def concreto(self, medidas: object, cantidad: int, dosificacion_tipo: str):
         pass
 
     @abstractmethod
-    def mortero(self):
+    def mortero(self, medidas: object, cantidad: int, dosificacion_tipo: str):
         pass
 
     @abstractmethod
