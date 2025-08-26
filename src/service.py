@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from .areas import Areas
+from .entidades import Areas
 
 
 class Service(ABC):
@@ -8,9 +8,9 @@ class Service(ABC):
         pass
 
     @abstractmethod
-    def material(self, area: Areas, dosificacion_tipo: str, cantidad_tipo: str):
+    def material(self, area: Areas, dosificacion_tipo: str, material_tipo: str):
         pass
 
     @abstractmethod
-    def elemento(self, nombre: str, medidas: object, cantidad: int, dosificacion_tipo: str, cantidad_tipo: str):
+    def elemento(self, nombre: str, medidas: object, cantidad: int, dosificacion_tipo: str, material_tipo: str):
         pass

@@ -1,10 +1,8 @@
 from .medidas import Medidas2D, Medidas3D
 from .service import Service
-from .areas import Areas
+from .entidades import Areas, Elemento
+from .materiales import Concreto, Mortero
 from decimal import Decimal as dec
-from .concreto import Concreto
-from .mortero import Mortero
-from .elementos import Elemento
 
 areas = Areas()
 concreto = Concreto()
@@ -53,8 +51,8 @@ class Implement(Service):
 
             return None
 
-    def material(self, area: Areas, dosificacion_tipo: str, cantidad_tipo: str):
-        if cantidad_tipo == "concreto":
+    def material(self, area: Areas, dosificacion_tipo: str, material_tipo: str):
+        if material_tipo == "concreto":
 
             objeto_dosificacion = None
 
@@ -70,7 +68,7 @@ class Implement(Service):
 
             return concreto
 
-        elif cantidad_tipo == "mortero":
+        elif material_tipo == "mortero":
 
             objeto_dosificacion = None
 
@@ -89,9 +87,12 @@ class Implement(Service):
 
             return None
 
-    def elemento(self, nombre: str, medidas: object, cantidad: int, dosificacion_tipo: str, cantidad_tipo: str):
+    def elemento(self, nombre: str, medidas: object, cantidad: int, dosificacion_tipo: str, material_tipo: str):
         area = self.area(medidas, cantidad)
-        material = self.material(area, dosificacion_tipo, cantidad_tipo)
+        material = self.material(area, dosificacion_tipo, material_tipo)
         elem = Elemento(nombre, cantidad, medidas, areas, material)
 
         return elem
+
+
+implement = Implement()
