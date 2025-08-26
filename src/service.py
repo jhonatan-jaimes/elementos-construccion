@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class Service(ABC):
     @abstractmethod
-    def areas(self):
+    def areas(self, medidas: object, cantidad: int):
         pass
 
     @abstractmethod

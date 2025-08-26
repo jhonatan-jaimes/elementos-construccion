@@ -1,13 +1,7 @@
-from decimal import Decimal as dec
-
-
 class Medidas2D:
     def __init__(self, largo: float = 0.0, ancho: float = 0.0):
         self.largo = largo
         self.ancho = ancho
-
-    def calcular(self):
-        return float(round(dec(self.largo * self.ancho), 2))
 
 
 class Medidas3D(Medidas2D):
@@ -15,5 +9,6 @@ class Medidas3D(Medidas2D):
         super().__init__(largo, ancho)
         self.alto = alto
 
-    def calcular(self):
-        return float(round(dec(super().calcular() * self.alto), 2))
+
+medidas_2d = Medidas2D()
+medidas_3d = Medidas3D()

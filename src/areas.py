@@ -6,3 +6,5 @@ class Areas:
     def area_all(self, cantidad: int):
         self.area_all = self.area_one * cantidad
 
+
+areas = Areas()
