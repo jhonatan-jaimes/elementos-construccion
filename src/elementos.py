@@ -13,5 +13,3 @@ class Elemento:
     def json(self):
         pass
 
-
-elemento = Elemento()

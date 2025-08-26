@@ -9,6 +9,3 @@ class Medidas3D(Medidas2D):
         super().__init__(largo, ancho)
         self.alto = alto
 
-
-medidas_2d = Medidas2D()
-medidas_3d = Medidas3D()

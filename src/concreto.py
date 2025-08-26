@@ -15,5 +15,3 @@ class Concreto(Mortero):
             "agua": self.agua
         }
 
-
-concreto = Concreto()

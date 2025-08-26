@@ -13,5 +13,3 @@ class Mortero:
                 "agua": self.agua
         }
 
-
-mortero = Mortero()

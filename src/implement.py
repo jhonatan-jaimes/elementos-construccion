@@ -1,10 +1,14 @@
-from src import Medidas2D, Medidas3D
-from service import Service
-from areas import areas, Areas
+from .medidas import Medidas2D, Medidas3D
+from .service import Service
+from .areas import Areas
 from decimal import Decimal as dec
-from .concreto import concreto
-from .mortero import mortero
-from .elementos import elemento
+from .concreto import Concreto
+from .mortero import Mortero
+from .elementos import Elemento
+
+areas = Areas()
+concreto = Concreto()
+mortero = Mortero()
 
 
 class Implement(Service):
@@ -36,12 +40,17 @@ class Implement(Service):
         if isinstance(medidas, Medidas3D):
             areas.area_one = round(float(dec(medidas.largo * medidas.ancho * medidas.alto)), 2)
             areas.area_all = round(float(dec(areas.area_one * cantidad)), 2)
+
             return areas
+
         elif isinstance(medidas, Medidas2D):
             areas.area_one = round(float(dec(medidas.largo * medidas.ancho)), 2)
             areas.area_all = round(float(dec(areas.area_one * cantidad)), 2)
+
             return areas
+
         else:
+
             return None
 
     def material(self, area: Areas, dosificacion_tipo: str, cantidad_tipo: str):
@@ -54,10 +63,10 @@ class Implement(Service):
                     objeto_dosificacion = self.dosificacion_concreto[clave]
                     break
 
-            concreto.cemento = float(round(dec(area) * dec(objeto_dosificacion["cemento"]), 2))
-            concreto.arena = float(round(dec(area) * dec(objeto_dosificacion["arena"]), 2))
-            concreto.grava = float(round(dec(area) * dec(objeto_dosificacion["grava"]), 2))
-            concreto.agua = float(round(dec(area) * dec(objeto_dosificacion["agua"]), 2))
+            concreto.cemento = float(round(dec(area.area_all) * dec(objeto_dosificacion["cemento"]), 2))
+            concreto.arena = float(round(dec(area.area_all) * dec(objeto_dosificacion["arena"]), 2))
+            concreto.grava = float(round(dec(area.area_all) * dec(objeto_dosificacion["grava"]), 2))
+            concreto.agua = float(round(dec(area.area_all) * dec(objeto_dosificacion["agua"]), 2))
 
             return concreto
 
@@ -70,24 +79,19 @@ class Implement(Service):
                     objeto_dosificacion = self.dosificacion_mortero[i]
                     break
 
-            mortero.cemento = float(round(dec(area) * dec(objeto_dosificacion["cemento"]), 2))
-            mortero.arena = float(round(dec(area) * dec(objeto_dosificacion["arena"]), 2))
-            mortero.agua = float(round(dec(area) * dec(objeto_dosificacion["agua"]), 2))
+            mortero.cemento = float(round(dec(area.area_all) * dec(objeto_dosificacion["cemento"]), 2))
+            mortero.arena = float(round(dec(area.area_all) * dec(objeto_dosificacion["arena"]), 2))
+            mortero.agua = float(round(dec(area.area_all) * dec(objeto_dosificacion["agua"]), 2))
 
             return mortero
+
         else:
+
             return None
 
     def elemento(self, nombre: str, medidas: object, cantidad: int, dosificacion_tipo: str, cantidad_tipo: str):
-
         area = self.area(medidas, cantidad)
-
         material = self.material(area, dosificacion_tipo, cantidad_tipo)
+        elem = Elemento(nombre, cantidad, medidas, areas, material)
 
-        elemento.nombre = nombre
-        elemento.cantidad = cantidad
-        elemento.medidas = medidas
-        elemento.areas = area
-        elemento.material = material
-
-        return elemento
+        return elem
