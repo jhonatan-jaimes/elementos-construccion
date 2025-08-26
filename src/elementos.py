@@ -1,9 +1,9 @@
 from src.areas import Areas
-from src.medidas import Medidas2D, Medidas3D
 
 
 class Elemento:
-    def __init__(self, nombre: str, cantidad: int, medidas: object, areas: Areas, material: object):
+    def __init__(self, nombre: str = "", cantidad: int = 0, medidas: object = None,
+                 areas: Areas = None, material: object = None):
         self.nombre = nombre
         self.cantidad = cantidad
         self.medidas = medidas
@@ -13,3 +13,5 @@ class Elemento:
     def json(self):
         pass
 
+
+elemento = Elemento()
