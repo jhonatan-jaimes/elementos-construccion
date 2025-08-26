@@ -1,7 +1,6 @@
-__all__ = ["Areas", "Concreto", "Elemento", "implement", "Medidas3D", "Medidas2D", "Mortero", "Service"]
+__all__ = ["Areas", "Elemento", "implement", "Material", "Service", "ddbb"]
 
-from .entidades import Areas, Elemento
-from .materiales import Concreto, Mortero
-from .medidas import Medidas2D, Medidas3D
+from .entity import Areas, Elemento, Medidas, Material
 from .service import Service
 from .implement import implement
+from .ddbb import ddbb

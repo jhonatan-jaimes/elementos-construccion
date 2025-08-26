@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from .entidades import Areas
+from .entity import Areas
 
 
 class Service(ABC):

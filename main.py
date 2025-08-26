@@ -1,19 +1,30 @@
-from src.medidas import Medidas3D, Medidas2D
+from src.entity import Medidas
+from src.ddbb import ddbb
 from src.implement import implement as imp
+
+med = Medidas()
 
 
 def run():
-    nombre = input("Ingrese el nombre del elemento: \n")
-    largo = float(input("Ingrese el largo del elemento: \n"))
-    ancho = float(input("Ingrese el ancho del elemento: \n"))
-    alto = float(input("Ingrese el ancho del elemento: \n"))
-    cantidad = int(input("Ingrese la cantidad de elementos: \n"))
-    material = input("Material del elemento: \n")
-    dosificacion = input("Dosificacion del material: \n")
-    med_3d = Medidas3D(largo, ancho, alto)
-    element = imp.elemento(nombre, med_3d, cantidad, dosificacion, material)
+    seguir = True
+    imprimir = False
+    while seguir:
+        nombre = input("Ingrese el nombre del elemento: ")
+        tipo_medidas = input("Que tipo es: [ 3D/2D ] ")
+        largo = float(input("Ingrese el largo del elemento: "))
+        ancho = float(input("Ingrese el ancho del elemento: "))
+        alto = float(input("Ingrese el alto del elemento: "))
+        cantidad = int(input("Ingrese la cantidad de elementos: "))
+        material = input("Material del elemento: ")
+        dosificacion = input("Dosificacion del material: ")
+        med_3d = Medidas(tipo_medidas, largo, ancho, alto)
+        element = imp.elemento(nombre, med_3d, cantidad, dosificacion, material)
+        ddbb.data_base.append(element)
 
-    print(element.json())
+        select = input("Desea ver elementos: [ y/n ] ")
+        if select.lower() == "y":
+            for e in ddbb.data_base:
+                print(e.json())
 
 
 if __name__ == '__main__':
