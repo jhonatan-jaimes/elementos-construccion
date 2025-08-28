@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from .entity import Areas, Medidas
+
+from .entity import Areas, Medidas, Elemento
 
 
 class Service(ABC):
@@ -13,4 +14,8 @@ class Service(ABC):
 
     @abstractmethod
     def elemento(self, nombre: str, medidas: Medidas, cantidad: int, dosificacion: str, material_tipo: str):
+        pass
+
+    @abstractmethod
+    def save_ele(self, element: Elemento):
         pass

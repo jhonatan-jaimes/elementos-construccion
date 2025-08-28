@@ -1,6 +1,6 @@
 from src.entity import Medidas
-from src.ddbb import ddbb
 from src.implement import implement as imp
+from src.ddbb import ddbb
 
 med = Medidas()
 
@@ -19,7 +19,7 @@ def run():
             dosificacion = input("Dosificacion del material: ")
             med_3d = Medidas(tipo_medidas, largo, ancho)
             element = imp.elemento(nombre, med_3d, cantidad, dosificacion, material)
-            ddbb.data_base.append(element)
+            imp.save_ele(element)
         elif tipo_medidas.lower() == "3d":
             nombre = input("Ingrese el nombre del elemento: ")
             largo = float(input("Ingrese el largo del elemento: "))
@@ -30,7 +30,7 @@ def run():
             dosificacion = input("Dosificacion del material: ")
             med_3d = Medidas(tipo_medidas, largo, ancho, alto)
             element = imp.elemento(nombre, med_3d, cantidad, dosificacion, material)
-            ddbb.data_base.append(element)
+            imp.save_ele(element)
         select = input("Desea ver elementos: [ y/n ] ")
         if select.lower() == "y":
             for e in ddbb.data_base:

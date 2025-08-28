@@ -1,5 +1,6 @@
 from .service import Service
 from .entity import Areas, Elemento, Material, Medidas
+from .ddbb import ddbb as db
 from decimal import Decimal as dec
 
 
@@ -112,6 +113,9 @@ class Implement(Service):
         elem = Elemento(nombre, cantidad, medidas, area, material)
 
         return elem
+
+    def save_ele(self, element: Elemento):
+        db.data_base.append(element)
 
 
 implement = Implement()
