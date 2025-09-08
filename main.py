@@ -1,6 +1,6 @@
 from src.entity import Medidas
 from src.implement import implement as imp
-from src.ddbb import ddbb
+from src.data_base.ddbb import ddbb
 
 med = Medidas()
 
