@@ -1,6 +1,6 @@
-from .service import Service
-from .entity import Areas, Elemento, Material, Medidas
-from .data_base.ddbb import ddbb as db
+from . import Service
+from . import Areas, Elemento, Material, Medidas
+from .data_base import ddbb as db
 from decimal import Decimal as dec
 
 
