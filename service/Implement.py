@@ -1,50 +1,13 @@
-from . import Service
-from . import Areas, Elemento, Material, Medidas
-from .data_base import ddbb as db
+from .Service import Service
+from entity import Medidas, Areas, Material, Elemento
 from decimal import Decimal as dec
+from util import tabla_mortero, tabla_concreto
 
 
 class Implement(Service):
     def __init__(self):
-        self.dosificacion_concreto = {
-            ("1:2:2", "280", "4000", "27"):
-                {"cemento": "420", "arena": "0.67", "grava": "0.67", "agua": "190"},
-            ("1:2:2.5", "240", "3555", "24"):
-                {"cemento": "380", "arena": "0.60", "grava": "0.76", "agua": "180"},
-            ("1:2:3", "226", "3224", "22"):
-                {"cemento": "350", "arena": "0.55", "grava": "0.84", "agua": "170"},
-            ("1:2:3.5", "210", "3000", "20"):
-                {"cemento": "320", "arena": "0.52", "grava": "0.90", "agua": "170"},
-            ("1:2:4", "200", "2850", "19"):
-                {"cemento": "300", "arena": "0.48", "grava": "0.95", "agua": "158"},
-            ("1:2:4.5", "189", "2700", "18"):
-                {"cemento": "280", "arena": "0.55", "grava": "0.89", "agua": "158"},
-            ("1:3:3", "168", "2400", "16"):
-                {"cemento": "300", "arena": "0.72", "grava": "0.72", "agua": "158"},
-            ("1:3:4", "159", "2275", "15"):
-                {"cemento": "260", "arena": "0.63", "grava": "0.83", "agua": "163"},
-            ("1:3:5", "140", "2000", "14"):
-                {"cemento": "230", "arena": "0.55", "grava": "0.92", "agua": "148"},
-            ("1:3:6", "119", "1700", "12"):
-                {"cemento": "210", "arena": "0.50", "grava": "1.00", "agua": "143"},
-            ("1:4:7", "109", "1560", "11"):
-                {"cemento": "175", "arena": "0.55", "grava": "0.98", "agua": "133"},
-            ("1:4:8", "99", "1420", "10"):
-                {"cemento": "160", "arena": "0.55", "grava": "1.03", "agua": "125"}
-        }
-
-        self.dosificacion_mortero = {
-            ("1:2", "310", "4400", "30"):
-                {"cemento": "525", "arena": "0.97", "agua": "230"},
-            ("1:3", "280", "3980", "27"):
-                {"cemento": "450", "arena": "1.10", "agua": "210"},
-            ("1:4", "240", "3400", "23"):
-                {"cemento": "375", "arena": "1.16", "agua": "200"},
-            ("1:5", "200", "2850", "19"):
-                {"cemento": "300", "arena": "1.18", "agua": "180"},
-            ("1:6", "160", "2275", "16"):
-                {"cemento": "275", "arena": "1.20", "agua": "180"},
-        }
+        self.dosificacion_concreto = tabla_concreto
+        self.dosificacion_mortero = tabla_mortero
 
     def area(self, medidas: Medidas, cantidad: int):
         areas = Areas()
@@ -113,9 +76,6 @@ class Implement(Service):
         elem = Elemento(nombre, cantidad, medidas, area, material)
 
         return elem
-
-    def save_ele(self, element: Elemento):
-        db.data_base.append(element)
 
 
 implement = Implement()
