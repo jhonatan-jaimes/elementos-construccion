@@ -14,17 +14,13 @@ class Implement(Service):
         if medidas.tipo.lower() == "3d":
             areas.area_one = round(float(dec(medidas.largo * medidas.ancho * medidas.alto)), 2)
             areas.area_all = round(float(dec(areas.area_one * cantidad)), 2)
-
             return areas
 
         elif medidas.tipo.lower() == "2d":
             areas.area_one = round(float(dec(medidas.largo * medidas.ancho)), 2)
             areas.area_all = round(float(dec(areas.area_one * cantidad)), 2)
-
             return areas
-
         else:
-
             return None
 
     def material(self, area: Areas, dosificacion: str, material_tipo: str):
@@ -44,7 +40,6 @@ class Implement(Service):
             material.arena = float(round(dec(area.area_all) * dec(objeto_dosificacion["arena"]), 2))
             material.grava = float(round(dec(area.area_all) * dec(objeto_dosificacion["grava"]), 2))
             material.agua = float(round(dec(area.area_all) * dec(objeto_dosificacion["agua"]), 2))
-
             return material
 
         elif material_tipo.lower() == "mortero":
@@ -63,19 +58,15 @@ class Implement(Service):
             material.arena = float(round(dec(area_corregida) * dec(objeto_dosificacion["arena"]), 2))
             material.grava = 0.0
             material.agua = float(round(dec(area_corregida) * dec(objeto_dosificacion["agua"]), 2))
-
             return material
 
         else:
-
             return None
 
     def elemento(self, nombre: str, medidas: Medidas, cantidad: int, dosificacion: str, material_tipo: str):
         area = self.area(medidas, cantidad)
         material = self.material(area, dosificacion, material_tipo)
-        elem = Elemento(nombre, cantidad, medidas, area, material)
-
-        return elem
+        return Elemento(nombre, cantidad, medidas, area, material)
 
 
 implement = Implement()
